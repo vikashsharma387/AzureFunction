@@ -3,7 +3,15 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "logicAppName": {
-      "value": null
+      "value": "ServiceBusQTriggerLA"
+    },
+    "servicebus_1_connectionString": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/a5037f66-08bf-4657-8dea-898ec0cf508a/resourceGroups/servicebusPOCrsggrp/providers/Microsoft.KeyVault/vaults/serviceBusConnString"
+        },
+        "secretName": "ServiceBusKey"
+      }
     }
   }
 }
