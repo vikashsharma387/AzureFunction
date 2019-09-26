@@ -6,6 +6,8 @@ using AzureWebApp.Data;
 using AzureWebApp.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using StackExchange.Redis;
 
 namespace AzureWebApp.Controllers
 {
@@ -20,12 +22,33 @@ namespace AzureWebApp.Controllers
         }
         // GET: api/Products
         [HttpGet]
-        public IEnumerable<Product> Get()
+        public string Get()
         {
-            IQueryable<Product> productResult=  productsDbContext.products;
+           
 
             // return new string[] { "value1", "value2" };
-            return productResult;
+          
+            string cacheConnectionstring = "cacheForPOC.redis.cache.windows.net:6380,password=a5WFYldJKCQaGQmN2ZL7mvQwtuJGoympAeBLmQ6DgZI=,ssl=True,abortConnect=False";
+            var connect = ConnectionMultiplexer.Connect(cacheConnectionstring);
+            IDatabase RedisCacheDB = connect.GetDatabase();
+            string ProdList = "";
+
+
+            // productResult = JsonConvert.DeserializeObject(ProdList.Cast<Product>);
+            // productResult = ProdList.
+
+            if (string.IsNullOrEmpty(RedisCacheDB.StringGet("ProductList")))
+            {
+                IQueryable<Product> productResult = productsDbContext.products;
+                ProdList = JsonConvert.SerializeObject(productResult);
+                RedisCacheDB.StringSet("ProductList", ProdList, TimeSpan.FromMinutes(1));
+            }
+            else
+            {
+                ProdList = RedisCacheDB.StringGet("ProductList");
+            }
+            return ProdList;
+
         }
 
         // GET: api/Products/5

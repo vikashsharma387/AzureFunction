@@ -28,7 +28,7 @@ namespace AzureWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddDbContext<ProductsDbContext>(option => option.UseSqlServer(@"Server = "", 1433; Initial Catalog = ""; Persist Security Info = False; User ID = ""; Password = ""; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = True; Connection Timeout = 60;"));
+            services.AddDbContext<ProductsDbContext>(option => option.UseSqlServer(@"Server = ., 1433; Initial Catalog = HRCDB; Persist Security Info = False; User ID = hrcuser; Password = Password@123; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = True; Connection Timeout = 60;"));
 
         }
 
