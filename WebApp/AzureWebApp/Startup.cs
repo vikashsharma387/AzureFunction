@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AzureWebApp.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -26,6 +28,8 @@ namespace AzureWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddDbContext<ProductsDbContext>(option => option.UseSqlServer(@"Server = "", 1433; Initial Catalog = ""; Persist Security Info = False; User ID = ""; Password = ""; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = True; Connection Timeout = 60;"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
