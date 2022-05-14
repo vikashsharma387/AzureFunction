@@ -1,0 +1,61 @@
+{
+	"info": {
+		"_postman_id": "e643cbe8-c99c-4e77-96d8-93c0190c0f0d",
+		"name": "PerformnaceTesting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "InvokeSFTriggerFlowService",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "Welcome@1234",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Devuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"SalesforceRquestDoc\":{\"schema\":\"?\",\"payload\":{\"UserName__c\":\"?\",\"CreatedById\":\"?\",\"CreatedDate\":\"?\",\"Salary__c\":\"?\"},\"event\":{\"EventUuid\":\"?\",\"replayId\":\"?\"}}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sagdevevangelist.int-aws-us.webmethods.io/integration/rest/external/integration/run/development/fl8bdebeb8e5be5b75296f88/PublishSFTriggerToCloudContainer",
+					"protocol": "https",
+					"host": [
+						"sagdevevangelist",
+						"int-aws-us",
+						"webmethods",
+						"io"
+					],
+					"path": [
+						"integration",
+						"rest",
+						"external",
+						"integration",
+						"run",
+						"development",
+						"fl8bdebeb8e5be5b75296f88",
+						"PublishSFTriggerToCloudContainer"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
